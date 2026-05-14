@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Корпоративный сайт | Бизнес-решения</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== ШАПКА ========== */
+        .header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e40af;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #1e40af;
+        }
+
+        .contact-btn {
+            background: #1e40af;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .header-inner {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .mobile-nav {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .mobile-nav.active {
+            display: block;
+        }
+        .mobile-nav a {
+            display: block;
+            padding: 12px 0;
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        /* ========== ГЕРОЙ ========== */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: white;
+            color: #1e3a8a;
+            padding: 12px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: #1e3a8a;
+            transform: translateY(-2px);
+        }
+
+        /* ========== СТАТИСТИКА ========== */
+        .stats {
+            padding: 60px 0;
+            background: white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-card {
+            padding: 20px;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        @media (max-width: 700px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ========== ОБЩИЕ СЕКЦИИ ========== */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #1e40af;
+            margin: 10px auto 0;
+        }
+
+        /* ========== УСЛУГИ ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .service-card i {
+            font-size: 2.5rem;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+        .service-card p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        .link {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @media (max-width: 800px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 550px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== О КОМПАНИИ (КРАТКО) ========== */
+        .about-short {
+            background: #f1f5f9;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-grid h2 {
+            margin-bottom: 20px;
+        }
+        .about-grid p {
+            color: #475569;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 800px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== ПОРТФОЛИО ========== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .portfolio-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        .portfolio-img {
+            height: 200px;
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        .portfolio-info {
+            padding: 20px;
+        }
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 800px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 550px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== ПРИЗЫВ К ДЕЙСТВИЮ ========== */
+        .cta {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-align: center;
+        }
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .cta p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .cta .btn-primary {
+            background: white;
+            color: #1e3a8a;
+        }
+
+        /* ========== КОНТАКТЫ ========== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-info i {
+            width: 30px;
+            color: #1e40af;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+        .contact-form button {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: #1e3a8a;
+        }
+        @media (max-width: 800px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== ФУТЕР ========== */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 50px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .footer a:hover {
+            color: #3b82f6;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+        }
+        @media (max-width: 700px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Corp<span>Solutions</span></a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Главная</a></li>
+                <li><a href="#about">О компании</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <a href="#contact" class="contact-btn">Связаться</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#home">Главная</a>
+            <a href="#about">О компании</a>
+            <a href="#services">Услуги</a>
+            <a href="#portfolio">Портфолио</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- ГЛАВНАЯ -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Надёжные решения <br>для вашего бизнеса</h1>
+            <p>Помогаем компаниям расти с помощью современных технологий и индивидуального подхода</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-primary">Наши услуги</a>
+                <a href="#contact" class="btn-secondary">Бесплатная консультация</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number">5+</div><div>лет на рынке</div></div>
+                <div class="stat-card"><div class="stat-number">120+</div><div>проектов</div></div>
+                <div class="stat-card"><div class="stat-number">98%</div><div>довольных клиентов</div></div>
+                <div class="stat-card"><div class="stat-number">24/7</div><div>поддержка</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О КОМПАНИИ -->
+    <section class="about-short" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2>О компании CorpSolutions</h2>
+                    <p>Мы — молодая динамичная команда, специализирующаяся на разработке корпоративных сайтов и интернет-решений для бизнеса. Наша цель — помогать компаниям расти через современные технологии.</p>
+                    <p>За 5 лет мы реализовали более 120 проектов для клиентов из разных сфер: от стартапов до крупных корпораций. Работаем по всей России.</p>
+                    <p><strong>Миссия:</strong> делать технологии доступными, понятными и выгодными для каждого бизнеса.</p>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x400/3b82f6/white?text=CorpSolutions" alt="О компании" style="width:100%; border-radius:20px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card"><i class="fas fa-code"></i><h3>Разработка сайтов</h3><p>Создаём сайты любой сложности под ключ</p><a href="#contact" class="link">Заказать →</a></div>
+                <div class="service-card"><i class="fas fa-chart-line"></i><h3>SEO-продвижение</h3><p>Выводим сайты в топ поисковых систем</p><a href="#contact" class="link">Заказать →</a></div>
+                <div class="service-card"><i class="fas fa-headset"></i><h3>Техническая поддержка</h3><p>Обслуживание и развитие проектов</p><a href="#contact" class="link">Заказать →</a></div>
+                <div class="service-card"><i class="fas fa-shopping-cart"></i><h3>Интернет-магазины</h3><p>Полнофункциональные магазины с корзиной</p><a href="#contact" class="link">Заказать →</a></div>
+                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>Веб-дизайн</h3><p>Уникальный дизайн, адаптив, прототипы</p><a href="#contact" class="link">Заказать →</a></div>
+                <div class="service-card"><i class="fas fa-chart-simple"></i><h3>Контекстная реклама</h3><p>Привлекаем целевых клиентов</p><a href="#contact" class="link">Заказать →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section class="about-short" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Наши проекты</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-store"></i></div><div class="portfolio-info"><h3>Мир игрушек</h3><p>Интернет-магазин на 5000+ товаров</p></div></div>
+                <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-building"></i></div><div class="portfolio-info"><h3>СтройГарант</h3><p>Корпоративный сайт с каталогом</p></div></div>
+                <div class="portfolio-item"><div class="portfolio-img"><i class="fas fa-graduation-cap"></i></div><div class="portfolio-info"><h3>Образовательный портал</h3><p>Платформа для онлайн-обучения</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРИЗЫВ К ДЕЙСТВИЮ -->
+    <section class="cta">
+        <div class="container">
+            <h2>Готовы обсудить ваш проект?</h2>
+            <p>Оставьте заявку — мы свяжемся с вами в течение 20 минут</p>
+            <a href="#contact" class="btn-primary">Связаться</a>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, 15</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+79112870694">8-911-287-06-94</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@corpsolutions.ru">info@corpsolutions.ru</a></p>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 – 18:00</p>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Ваше имя" id="name" required>
+                        <input type="tel" placeholder="Телефон" id="phone" required>
+                        <input type="email" placeholder="Email" id="email" required>
+                        <textarea placeholder="Сообщение" id="message" rows="5"></textarea>
+                        <button type="submit">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div><h4>CorpSolutions</h4><p>Надёжные IT-решения для бизнеса</p></div>
+            <div><h4>Навигация</h4><a href="#home">Главная</a><a href="#about">О компании</a><a href="#services">Услуги</a><a href="#portfolio">Портфолио</a><a href="#contact">Контакты</a></div>
+            <div><h4>Контакты</h4><a href="tel:+79112870694">+7 (911) 287-06-94</a><a href="mailto:info@corpsolutions.ru">info@corpsolutions.ru</a></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 CorpSolutions. Все права защищены.</p></div>
+    </div>
+</footer>
+
+<script>
+    // Мобильное меню
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+    }
+
+    // Плавная прокрутка для мобильного меню
+    document.querySelectorAll('.mobile-nav a, .nav-menu a, .contact-btn').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const hash = link.getAttribute('href');
+            if (hash && hash.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    mobileNav.classList.remove('active');
+                }
+            }
+        });
+    });
+
+    // Активная ссылка в меню при скролле
+    const sections = document.querySelectorAll('section[id]');
+    function updateActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+
+    // Отправка формы (уведомление)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+            contactForm.reset();
+        });
+    }
+</script>
+
+</body>
+</html>
